@@ -11,20 +11,20 @@ c_str = '\d{1,} (?:red|green|blue)(?:, \d{1,} (?:red|green|blue))?(?:, \d{1,} (?
 File.foreach("in.txt") do |line|
   line =~ /^Game (\d{1,})/
   game_number = $1.to_i
-  #puts "Game number: #{game_number}"
-  
+  # puts "Game number: #{game_number}"
+
   line = line.sub("\n", ';')
   scan = line.scan(Regexp.new(c_str))
- 
-  this_game = game.dup 
+
+  this_game = game.dup
   scan.each do |draw|
-    
+
     %w[red green blue].each do |color|
 
       draw =~ /(\d{1,}) #{color}/
       number = $1.to_i
       this_game[color.to_sym] = number if number > this_game[color.to_sym]
-      #ap({ 'color': color, 'draw': number, 'max': this_game[color.to_sym] })
+      # ap({ 'color': color, 'draw': number, 'max': this_game[color.to_sym] })
     end
 
   end

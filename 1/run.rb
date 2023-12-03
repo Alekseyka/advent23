@@ -15,7 +15,7 @@ list = map.keys.map(&:to_s) + map.values.map(&:to_s)
 puts list
 rlist = list.map &:reverse
 
-File.foreach("input.txt") do |line|
+File.foreach("in.txt") do |line|
   first = line[Regexp.union(list)]
   first_n = first =~ /[0-9]/ ? first : map[first.to_sym]
   first_n = first_n.to_i  
