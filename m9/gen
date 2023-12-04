@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
-require 'awesome_print'
 require 'fileutils'
 require 'httparty'
-require 'pry'
 
 class AdventOfCodeClient
   include HTTParty
