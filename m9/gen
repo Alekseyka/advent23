@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+require 'awesome_print'
+require 'pry'
+require 'fileutils'
+
+def fetch_input(file)
+
+  File.write file, data
+end
+
+DIRNAME = ARGV.first
+INPUT_FILE = "#{DIRNAME}/input.txt"
+EXAMPLE_FILE = "#{DIRNAME}/example.txt"
+SOLUTION_FILE = "#{DIRNAME}/solution#{DIRNAME}.rb"
+TEMPLATE_FILE = "_template.rb"
+
+abort "Error: Please provide a numeric argument"  if DIRNAME.nil?
+abort "Error: Wrong argument '#{DIRNAME}', should be a number"  if DIRNAME.to_i.zero?
+abort "Error: Directory '#{DIRNAME}' already exists."  if File.directory?(DIRNAME)
+
+FileUtils.mkdir DIRNAME, mode: 0700 rescue abort 'Error: mkdir failed.'
+FileUtils.touch [INPUT_FILE, EXAMPLE_FILE, SOLUTION_FILE] rescue abort 'Error: touch failed.'
+FileUtils.chmod 0600, [INPUT_FILE, EXAMPLE_FILE] rescue abort 'Error: chmod failed.'
+FileUtils.chmod 0700, SOLUTION_FILE rescue abort 'Error: chmod failed.'
+FileUtils.cp TEMPLATE_FILE, SOLUTION_FILE rescue abort 'Error: cp failed.'
+
+fetch_input INPUT_FILE
+
+
+
