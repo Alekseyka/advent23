@@ -1,7 +1,9 @@
+#!/usr/bin/env ruby
+
 require 'pry'
 require 'awesome_print'
 
-input = File.read('input2.txt')
+input = File.read('example.txt')
 # input = File.read('input.txt')
 
 input
