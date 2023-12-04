@@ -1,11 +1,30 @@
 #!/usr/bin/env ruby
 require 'awesome_print'
-require 'pry'
 require 'fileutils'
+require 'httparty'
+require 'pry'
 
-def fetch_input(file)
+class AdventOfCodeClient
+  include HTTParty
+  base_uri 'adventofcode.com'
 
-  File.write file, data
+  def initialize(year=2023)
+    @year = year
+    @cookie_hash = HTTParty::CookieHash.new
+    set_cookies
+
+    @options = { headers: {'Cookie' => @cookie_hash.to_cookie_string }}
+  end
+
+  def get_task_input(day)
+    self.class.get "/#{@year}/day/#{day}/input", @options
+  end
+
+  private
+
+  def set_cookies
+    @cookie_hash.add_cookies(ENV['AOC_COOKIE'])
+  end
 end
 
 DIRNAME = ARGV.first
@@ -24,7 +43,8 @@ FileUtils.chmod 0600, [INPUT_FILE, EXAMPLE_FILE] rescue abort 'Error: chmod fail
 FileUtils.chmod 0700, SOLUTION_FILE rescue abort 'Error: chmod failed.'
 FileUtils.cp TEMPLATE_FILE, SOLUTION_FILE rescue abort 'Error: cp failed.'
 
-fetch_input INPUT_FILE
+File.write INPUT_FILE, AdventOfCodeClient.new.get_task_input(DIRNAME) rescue abort 'Error: writing input file failed'
+
 
 
 
