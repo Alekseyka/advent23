@@ -1,48 +1,41 @@
 #!/usr/bin/env ruby
+require 'erb'
 require 'fileutils'
 require 'httparty'
 
-class AdventOfCodeClient
-  include HTTParty
-  base_uri 'adventofcode.com'
+TEMPLATE = ERB.new <<-EOF
+#!/usr/bin/env ruby
 
-  def initialize(year=2023)
-    @year = year
-    @cookie_hash = HTTParty::CookieHash.new
-    set_cookies
+require 'pry'
+require 'awesome_print'
+require_relative '../lib/advent_of_code_client.rb'
 
-    @options = { headers: {'Cookie' => @cookie_hash.to_cookie_string }}
-  end
-
-  def get_task_input(day)
-    self.class.get "/#{@year}/day/#{day}/input", @options
-  end
-
-  private
-
-  def set_cookies
-    @cookie_hash.add_cookies(ENV['AOC_COOKIE'])
-  end
+if File.zero? 'input.txt'
+  File.write 'input.txt', AdventOfCodeClient.new.get_task_input('<%= DIRNAME %>')
 end
+
+# input = File.read('input.txt')
+input = File.read('example.txt')
+
+input
+  .each_line
+# .sum {_1.to_i }
+# .map(&:to_i)
+# .inject(:*)
+# .tap { ap _1  }
+EOF
 
 DIRNAME = ARGV.first
 INPUT_FILE = "#{DIRNAME}/input.txt"
 EXAMPLE_FILE = "#{DIRNAME}/example.txt"
-SOLUTION_FILE = "#{DIRNAME}/solution#{DIRNAME}.rb"
-TEMPLATE_FILE = "_template.rb"
+SOLUTION_FILES = (1..2).map { "#{DIRNAME}/solution#{DIRNAME}-#{_1}.rb"}
 
 abort "Error: Please provide a numeric argument"  if DIRNAME.nil?
 abort "Error: Wrong argument '#{DIRNAME}', should be a number"  if DIRNAME.to_i.zero?
 abort "Error: Directory '#{DIRNAME}' already exists."  if File.directory?(DIRNAME)
 
 FileUtils.mkdir DIRNAME, mode: 0700 rescue abort 'Error: mkdir failed.'
-FileUtils.touch [INPUT_FILE, EXAMPLE_FILE, SOLUTION_FILE] rescue abort 'Error: touch failed.'
+FileUtils.touch [INPUT_FILE, EXAMPLE_FILE, SOLUTION_FILES].flatten rescue abort 'Error: touch failed.'
 FileUtils.chmod 0600, [INPUT_FILE, EXAMPLE_FILE] rescue abort 'Error: chmod failed.'
-FileUtils.chmod 0700, SOLUTION_FILE rescue abort 'Error: chmod failed.'
-FileUtils.cp TEMPLATE_FILE, SOLUTION_FILE rescue abort 'Error: cp failed.'
-
-File.write INPUT_FILE, AdventOfCodeClient.new.get_task_input(DIRNAME) rescue abort 'Error: writing input file failed'
-
-
-
-
+FileUtils.chmod 0700, SOLUTION_FILES rescue abort 'Error: chmod failed.'
+SOLUTION_FILES.map { File.write _1, TEMPLATE.result rescue abort 'Error: cp failed.' }
