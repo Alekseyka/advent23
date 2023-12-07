@@ -22,12 +22,11 @@ WIN_CARDS = {
 }.freeze
 
 def calculate_hand(combination, jokers, hand)
-  ap "Hand: #{hand}, jokers: #{jokers}, comb: #{combination}"
   return combination if jokers == 0
   return :four_kind if combination == :two_pair && jokers == 2
   return :full_house if combination == :two_pair && jokers == 1
   return :four_kind if combination == :three_kind && jokers == 3
-  return :two_pair if combination == :one_pair && jokers == 1
+  return :three_kind if combination == :one_pair && jokers == 1
   return :three_kind if combination == :one_pair && jokers == 2
 
   ac = ACTIVE_CARDS[combination] + jokers
@@ -60,7 +59,7 @@ File.foreach('input.txt') do |line|
                       :higher_card
                     end
   new_combination = calculate_hand(the_combination, joker_count, sorted_hand)
-  ap "Hand: #{sorted_hand}, jokers: #{joker_count}, comb: #{the_combination} --> #{new_combination}"
+  ap "Hand: #{sorted_hand}, jokers: #{joker_count}, comb: #{the_combination} --> #{new_combination}" if joker_count > 0
   scan[:sort0] = WIN_CONDITIONS[new_combination]
 
   scan[:sort1] = WIN_CARDS[scan[:hand][0].to_sym]
