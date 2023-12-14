@@ -54,11 +54,11 @@ puts "The number: #{the_number2}, digits: #{the_number2.to_s.length}"
 #   if current_steps.select { |i| i[2] == 'Z' }.length == current_steps.length
 #     puts "\n"
 #     ap current_steps
-#     puts "STEPS #{steps + 1}"
+#     puts "STEPS #{steps + day01}"
 #     break
 #   else
-#     lr_index = lr_index + 1 > (lr.length - 1) ? 0 : lr_index + 1
-#     steps += 1
+#     lr_index = lr_index + day01 > (lr.length - day01) ? 0 : lr_index + day01
+#     steps += day01
 #   end
 # end
 
