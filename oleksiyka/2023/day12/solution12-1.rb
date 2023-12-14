@@ -45,7 +45,7 @@ File.foreach(filename) do |line|
 
   # puts "----->LINE #{springs}, #{numbers}"
   if numbers.length - 1 + numbers.sum == springs.length
-    puts '----->1'
+    puts '----->day01'
     result += 1
     next
   end

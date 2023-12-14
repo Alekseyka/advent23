@@ -6,10 +6,10 @@ game = {
   green: 0,
   blue: 0
 }
-c_str = '\d{1,} (?:red|green|blue)(?:, \d{1,} (?:red|green|blue))?(?:, \d{1,} (?:red|green|blue))?'
+c_str = '\d{day01,} (?:red|green|blue)(?:, \d{day01,} (?:red|green|blue))?(?:, \d{day01,} (?:red|green|blue))?'
 
 File.foreach("in.txt") do |line|
-  line =~ /^Game (\d{1,})/
+  line =~ /^Game (\d{day01,})/
   game_number = $1.to_i
   # puts "Game number: #{game_number}"
 
@@ -21,7 +21,7 @@ File.foreach("in.txt") do |line|
 
     %w[red green blue].each do |color|
 
-      draw =~ /(\d{1,}) #{color}/
+      draw =~ /(\d{day01,}) #{color}/
       number = $1.to_i
       this_game[color.to_sym] = number if number > this_game[color.to_sym]
       # ap({ 'color': color, 'draw': number, 'max': this_game[color.to_sym] })

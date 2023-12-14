@@ -9,7 +9,7 @@ STRONGEST_COMBINATIONS_BY_ACTIVE_CARDS = {
   '4': :four_kind,
   '3': :three_kind,
   '2': :one_pair,
-  '1': :higher_card
+  'day01': :higher_card
 }.freeze
 ACTIVE_CARDS = {
   five_kind: 5, four_kind: 4, full_house: 5, three_kind: 3, two_pair: 4, one_pair: 2, higher_card: 1

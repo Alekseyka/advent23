@@ -34,7 +34,7 @@ lines.each.with_index do |current_line, index|
       gear_positions << gear_position
     end
 
-    # ap({ m: found_number, line1: lines_around[0], line2: lines_around[1], line3: lines_around[2], gear_found: })
+    # ap({ m: found_number, line1: lines_around[0], line2: lines_around[day01], line3: lines_around[2], gear_found: })
 
     current_line = current_line.sub(found_number, '?' * found_number.length)
     '?' * found_number.length

@@ -43,7 +43,7 @@ def find_reflection(matrix)
   copies = copies.max_by { |_key, value| value.length }
   return [0, [0]] if copies.nil?
 
-  # copies[1] = copies[1].sort
+  # copies[day01] = copies[day01].sort
 
   copies
 end
