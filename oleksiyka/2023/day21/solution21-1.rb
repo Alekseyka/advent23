@@ -4,7 +4,7 @@ require 'awesome_print'
 
 filename = 'input.txt'
 # filename = 'example.txt'
-STEPS = 26501365
+STEPS = 64
 
 def pr_gr(grid)
   grid.each { |i| puts i.join }
