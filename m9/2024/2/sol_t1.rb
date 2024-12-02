@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 
-
 require_relative '../common'
-
 $get.day(2)
 
 input     = File.read($o[:test] ? 'example.txt' : 'input.txt')
