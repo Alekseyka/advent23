@@ -13,6 +13,7 @@ func errorHandler(err error) {
 		panic(err)
 	}
 }
+
 func inputFileName(testFlag *bool) string {
 	if *testFlag {
 		return "example.txt"
@@ -65,7 +66,7 @@ func sol2(input string) int {
 		"do()":    true,
 		"don't()": true,
 	}
-	
+
 	for _, v := range matches {
 
 		if modifiers[v[0]] {
