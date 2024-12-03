@@ -48,7 +48,7 @@ func sol1(input string) int {
 		b, err := strconv.Atoi(v[2])
 		errorHandler(err)
 
-		sum = sum + a*b
+		sum += a * b
 	}
 
 	return sum
@@ -88,7 +88,7 @@ func sol2(input string) int {
 			b, err := strconv.Atoi(v[2])
 			errorHandler(err)
 
-			sum = sum + a*b
+			sum += a * b
 		}
 	}
 
