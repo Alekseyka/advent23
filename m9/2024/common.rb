@@ -8,7 +8,7 @@ class AOC
   include HTTParty
   base_uri 'adventofcode.com'
 
-  def initialize(year=2024)
+  def initialize(year)
     @year = year
     @cookie_hash = HTTParty::CookieHash.new
     set_cookies
