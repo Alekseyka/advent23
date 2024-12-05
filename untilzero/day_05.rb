@@ -36,7 +36,6 @@ pages.each do |page|
   if(ordered(rules,page))
     middies += page[(page.length / 2).ceil]
   else
-    loops = 0
     while (!ordered(rules,page)) do
       reorder(rules,page)
     end
