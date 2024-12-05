@@ -35,4 +35,4 @@ end
 
 
 $o = Optimist::options {opt :test}
-$get = AOC.new
+$get = AOC.new(2024)
