@@ -72,10 +72,3 @@ incorrect.each do |k, v|
 end
 
 ap fixed.map { _1[_1.length / 2]}.sum
-
-# incorrect.each do |ary, rules|
-#   ary.sort do |a, b|
-#
-#   end
-#   # ap ary
-# end
