@@ -49,28 +49,6 @@ pages.each do |page|
   end
 end
 
-fixed = []
-
-
-
-def fixme(ary, rules)
-  bad = rules[:bad]
-  all = rules[:all]
-  
-  # no_rules = ary.select {|a| !all.flatten(1).uniq.include?(a) }
-  
-  left_ht = Hash.new {|h,k| h[k]=[] }
-  
-  all.each do |rule|
-    left_ht[rule[1]] << rule[0]
-  end
-  # pp ary
-  # pp all
-  # pp rules
-  # pp left_ht
-  # pp '-----'
-end
-
 def sorter(rules, a, b)
   # puts "rules = #{rules}"
   # puts "a = #{a}, b = #{b}"
