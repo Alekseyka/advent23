@@ -1,3 +1,4 @@
+start_time = Time.now
 @map = []
 @visited_positions = {}
 @guard_initial_direction = [-1, 0]
@@ -41,7 +42,6 @@ def move_guard
     return
   end
   if @visited_positions["#{new_guard[0]}:#{new_guard[1]}:#{@guard_direction[0]}:#{@guard_direction[1]}"] == 1
-    p "Cycle!"
     @guard_cycle = true
     return
   end
@@ -59,28 +59,26 @@ until @guard_out
 end
 
 
-@possible_obstacles = @visited_positions.keys.map {|p| [p.split(':')[0].to_i, p.split(':')[1].to_i]}.uniq
-p @possible_obstacles
+@possible_obstacles = @visited_positions.keys.map {|p| ps = p.split(':'); {position: [ps[0].to_i, ps[1].to_i], direction: [ps[2].to_i, ps[3].to_i]} }.uniq
 @possible_obstacles.delete(@zero_position[:position])
 
 q = 0
-psize = @possible_obstacles.size
 @possible_obstacles.each.with_index do |obstacle, index|
-  p "O #{index} from #{psize}"
   @visited_positions = {}
-  @guard = @initial_guard
-  @guard_direction = @guard_initial_direction
+  @guard = @possible_obstacles[index-1][:position]
+  @guard_direction = @possible_obstacles[index-1][:direction]
   @guard_out = false
   @guard_cycle = false
   @map = @initial_map.map(&:dup)
-  @map[obstacle[0]][obstacle[1]] = '#'
+  @map[obstacle[:position][0]][obstacle[:position][1]] = '#'
   until @guard_out || @guard_cycle
     move_guard
   end
   if @guard_cycle
-    p "Obstacle: #{obstacle}"
     q += 1
   end
 end
 
 p q
+end_time = Time.now
+puts "Took #{end_time - start_time} seconds to execute"
