@@ -9,17 +9,15 @@ GEM
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
+    matrix (0.4.2)
     method_source (1.1.0)
     mini_mime (1.1.5)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    numo-narray (0.9.2.1)
     optimist (3.2.0)
     pry (0.15.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    rover-df (0.4.1)
-      numo-narray (>= 0.9.1.9)
 
 PLATFORMS
   arm64-darwin-24
@@ -28,9 +26,9 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   httparty
+  matrix
   optimist
   pry
-  rover-df
 
 BUNDLED WITH
    2.5.22
