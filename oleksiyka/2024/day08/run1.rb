@@ -1,18 +1,6 @@
 nodes = {}
 map = []
 
-def print_map(map)
-  map.each { |i| puts i.join }
-end
-
-def c_2d_to_1d(pos, cols)
-  pos[0] * cols + pos[1]
-end
-
-def c_1d_to_2d(pos, cols)
-  [(pos / cols).to_i, (pos % cols).to_i]
-end
-
 File.foreach('in.txt').with_index do |line, line_index|
   line = line.sub("\n", '')
   map.push(line.chars)
