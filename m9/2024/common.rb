@@ -2,8 +2,10 @@ require 'awesome_print'
 require 'pry'
 require 'optimist'
 require 'httparty'
-require 'rover-df'
 require 'pry'
+require 'linked-list'
+require 'tree'
+require 'matrix'
 
 
 class AOC
