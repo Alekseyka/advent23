@@ -1,9 +1,11 @@
 source "https://rubygems.org"
 
-gem 'optimist'
-gem 'pry'
-gem 'awesome_print'
-gem 'httparty'
-gem 'matrix'
-gem 'linked-list'
-gem 'rubytree'
+gem "optimist"
+gem "pry"
+gem "awesome_print"
+gem "httparty"
+gem "matrix"
+gem "linked-list"
+gem "rubytree"
+gem "standard", ">= 1.35.1"
+gem "rubocop"
