@@ -10,8 +10,8 @@ def is_in_bounds?(x, y, map)
   x >= 0 && y >= 0 && x < map.size && y < map.first.size
 end
 
-def is_step_up?(a, b)
-  1 == a - b
+def is_step_up?(current_position, next_position)
+  1 == next_position - current_position 
 end
 
 def find_trail(first_node, map, scores)
@@ -33,10 +33,10 @@ def find_trail(first_node, map, scores)
     node_n = TrailNode.new(point_n) unless point_n.nil?
     node_s = TrailNode.new(point_s) unless point_s.nil?
 
-    first_node << node_n if node_n && is_step_up?(node_n.name.value, first_node.name.value)
-    first_node << node_s if node_s && is_step_up?(node_s.name.value, first_node.name.value)
-    first_node << node_w if node_w && is_step_up?(node_w.name.value, first_node.name.value)
-    first_node << node_e if node_e && is_step_up?(node_e.name.value, first_node.name.value)
+    first_node << node_n if node_n && is_step_up?(first_node.name.value, node_n.name.value)
+    first_node << node_s if node_s && is_step_up?(first_node.name.value, node_s.name.value)
+    first_node << node_w if node_w && is_step_up?(first_node.name.value, node_w.name.value)
+    first_node << node_e if node_e && is_step_up?(first_node.name.value, node_e.name.value)
 
     first_node.children.each do |child|
       find_trail(child, map, scores) unless child.nil?
